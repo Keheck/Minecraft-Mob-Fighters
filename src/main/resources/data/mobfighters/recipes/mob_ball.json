@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+          [
+            " I ",
+            "RBI",
+            " R "
+          ],
+  "key":
+  {
+    "I":
+    {
+      "item": "minecraft:iron_ingot"
+    },
+    "B":
+    {
+      "item": "minecraft:stone_button"
+    },
+    "R":
+    {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result":
+  {
+    "item": "mobfighters:mob_ball"
+  }
+}
