@@ -2,18 +2,18 @@ package io.github.keheck.mobfighters.registry;
 
 import io.github.keheck.mobfighters.MobFighters;
 import io.github.keheck.mobfighters.entity.Entities;
+import io.github.keheck.mobfighters.entity.MobBallEntity;
 import io.github.keheck.mobfighters.item.MobBallItem;
 import io.github.keheck.mobfighters.registry.entries.FighterEntry;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.*;
 
 /**
@@ -62,7 +62,13 @@ public class Registry
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityType<?>> entityTypeRegister)
     {
-        entityTypeRegister.getRegistry().register(Entities.MOB_BALL.setRegistryName(MobFighters.getModLocation("mob_ball")));
+        entityTypeRegister.getRegistry().registerAll(
+                EntityType.Builder
+                        .<MobBallEntity>create(MobBallEntity::new, EntityClassification.MISC)
+                        .size(.25f, .25f)
+                        .setCustomClientFactory((entity, world) -> new MobBallEntity(Entities.mob_ball, world))
+                        .build("mob_ball")
+                        .setRegistryName(MobFighters.getModLocation("mob_ball")));
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

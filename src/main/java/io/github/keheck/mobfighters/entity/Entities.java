@@ -4,15 +4,14 @@ import io.github.keheck.mobfighters.MobFighters;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraftforge.registries.ObjectHolder;
 
 import java.util.ArrayList;
 
+@ObjectHolder(MobFighters.MODID)
 public class Entities
 {
-    public static final EntityType<MobBallEntity> MOB_BALL = EntityType.Builder
-            .<MobBallEntity>create(MobBallEntity::new, EntityClassification.MISC)
-            .size(.25f, .25f)
-            .build("mob_ball");
+    public static final EntityType<MobBallEntity> mob_ball = null;
 
     public static final EntityType<Fighter> FIGHTER = EntityType.Builder
             .<Fighter>create(Fighter::new, EntityClassification.MISC)
