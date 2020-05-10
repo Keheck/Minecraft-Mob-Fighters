@@ -4,6 +4,7 @@ import io.github.keheck.mobfighters.registry.ClientRegistry;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +15,7 @@ public final class MobFighters
     public static final String MODID = "mobfighters";
     public static final Logger LOGGER = LogManager.getLogger("Mob Fighters");
     private static MobFighters instance;
+    public static final boolean testing = true;
 
     public MobFighters()
     {

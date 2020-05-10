@@ -1,3 +1,5 @@
 {
-  "item.mobfighters.mob_ball": "Mob Ball"
+  "item.mobfighters.mob_ball": "Mob Ball",
+  "item.mobfighters.mob_ball_deprecated": "Mob Ball (Deprecated)",
+  "item.mobfighters.fight_initiator": "Fight Initiator"
 }

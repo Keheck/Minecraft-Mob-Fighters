@@ -7,4 +7,6 @@ import net.minecraftforge.registries.ObjectHolder;
 public class Items
 {
     public static final Item mob_ball = null;
+    public static final Item mob_ball_deprecated = null;
+    public static final Item fight_initiator = null;
 }
