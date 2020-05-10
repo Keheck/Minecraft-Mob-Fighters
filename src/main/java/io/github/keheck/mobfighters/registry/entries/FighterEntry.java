@@ -40,6 +40,11 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
     @Deprecated
     public FighterEntry setRegistryName(ResourceLocation name) { return this; }
 
+    public void applyData(ResourceLocation[] movePool, ResourceLocation[] learnPool)
+    {
+
+    }
+
     /**
      * Not to be confused with the {@link FighterEntryBuilder}, this method returns an instance of
      * {@link Fighter} or one of it's subclasses

@@ -14,6 +14,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
@@ -63,10 +64,16 @@ public class Registry
                 );
     }
 
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void registerFighters(RegistryEvent.Register<FighterEntry> fighterEntryRegister)
     {
         fighterEntryRegister.getRegistry().registerAll();
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void readData(RegistryEvent.Register<FighterEntry> fighterEntryRegister)
+    {
+        //I want to read the data here...
     }
 
     @SubscribeEvent
