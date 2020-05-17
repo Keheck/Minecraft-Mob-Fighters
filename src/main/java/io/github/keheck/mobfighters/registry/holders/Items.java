@@ -1,4 +1,4 @@
-package io.github.keheck.mobfighters.item;
+package io.github.keheck.mobfighters.registry.holders;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.registries.ObjectHolder;

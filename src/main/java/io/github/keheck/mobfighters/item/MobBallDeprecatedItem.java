@@ -16,7 +16,7 @@ public class MobBallDeprecatedItem extends Item
     public MobBallDeprecatedItem()
     {
         super(new Properties().maxStackSize(1));
-        setRegistryName(MobFighters.getModLocation("mob_ball_deprecated"));
+        setRegistryName(MobFighters.MODID, "mob_ball_deprecated");
     }
 
     @Override

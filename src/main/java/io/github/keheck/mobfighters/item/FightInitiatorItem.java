@@ -15,7 +15,7 @@ public class FightInitiatorItem extends Item
     public FightInitiatorItem()
     {
         super(new Properties().group(ItemGroup.MISC));
-        setRegistryName(MobFighters.getModLocation("fight_initiator"));
+        setRegistryName(MobFighters.MODID, "fight_initiator");
     }
 
     @Override

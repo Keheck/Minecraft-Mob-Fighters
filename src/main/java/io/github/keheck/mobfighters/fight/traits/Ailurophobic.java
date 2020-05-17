@@ -1,11 +1,12 @@
 package io.github.keheck.mobfighters.fight.traits;
 
+import io.github.keheck.mobfighters.fight.fighters.Fighter;
 import io.github.keheck.mobfighters.fight.traits.effects.IChanceModifier;
 import io.github.keheck.mobfighters.registry.entries.FighterEntry;
 
 public class Ailurophobic extends Trait implements IChanceModifier
 {
-    public Ailurophobic(FighterEntry owner)
+    public Ailurophobic(Fighter owner)
     {
         super(owner, ActivationType.MOVE);
     }
@@ -14,7 +15,7 @@ public class Ailurophobic extends Trait implements IChanceModifier
     public float getChance() { return -0.3f; }
 
     @Override
-    public void applyEffect(FighterEntry[] ownParty, FighterEntry[] enemyParty, ActivationType phase)
+    public void applyEffect(Fighter[] ownParty, Fighter[] enemyParty, ActivationType phase)
     {
 
     }

@@ -1,5 +1,6 @@
 package io.github.keheck.mobfighters.registry.entries;
 
+import io.github.keheck.mobfighters.fight.fighters.Fighter;
 import io.github.keheck.mobfighters.fight.moves.Move;
 import io.github.keheck.mobfighters.util.IMoveFactory;
 import net.minecraft.util.ResourceLocation;
@@ -11,15 +12,8 @@ public final class MoveEntry implements IForgeRegistryEntry<MoveEntry>
 {
     private ResourceLocation registryName;
     private IMoveFactory factory;
-    private int maxUses = 20;
 
     public MoveEntry(IMoveFactory factory) { this.factory = factory; }
-
-    public MoveEntry setMaxUses(int maxUses)
-    {
-        this.maxUses = maxUses;
-        return this;
-    }
 
     @Override
     public MoveEntry setRegistryName(ResourceLocation name)
@@ -28,7 +22,12 @@ public final class MoveEntry implements IForgeRegistryEntry<MoveEntry>
         return this;
     }
 
-    public Move onFightInit(FighterEntry owner) { return factory.build(owner, maxUses); }
+    public MoveEntry setRegistryName(String modID, String name)
+    {
+        return this.setRegistryName(new ResourceLocation(modID, name));
+    }
+
+    public Move onFighterInit(Fighter owner) { return factory.build(owner); }
 
     @Nullable
     @Override

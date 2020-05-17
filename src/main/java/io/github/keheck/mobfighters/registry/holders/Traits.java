@@ -1,4 +1,4 @@
-package io.github.keheck.mobfighters.fight.traits;
+package io.github.keheck.mobfighters.registry.holders;
 
 import net.minecraftforge.registries.ObjectHolder;
 

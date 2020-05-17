@@ -1,6 +1,6 @@
 package io.github.keheck.mobfighters.event.listener;
 
-import io.github.keheck.mobfighters.item.Items;
+import io.github.keheck.mobfighters.registry.holders.Items;
 import io.github.keheck.mobfighters.gui.screen.FightScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;

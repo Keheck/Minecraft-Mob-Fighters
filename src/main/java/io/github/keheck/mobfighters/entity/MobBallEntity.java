@@ -1,7 +1,6 @@
 package io.github.keheck.mobfighters.entity;
 
-import io.github.keheck.mobfighters.MobFighters;
-import io.github.keheck.mobfighters.item.Items;
+import io.github.keheck.mobfighters.registry.holders.Items;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

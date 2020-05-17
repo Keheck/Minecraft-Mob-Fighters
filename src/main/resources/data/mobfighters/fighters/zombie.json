@@ -1,0 +1,25 @@
+{
+  "hp": 20,
+  "atk": 3,
+  "def": 2,
+  "spd": 2,
+  "traits":
+          [
+            "undead",
+            "death_rage",
+            "water_reactive",
+            "humanoid"
+          ],
+  "startMoves":
+          [
+            { "moveID": "pounce", "prob": 1.0 }
+          ],
+  "learnMoves":
+          [
+            { "moveID": "growl", "prob": 0.1, "minLvl": 10 }
+          ],
+  "water_reactive":
+  {
+    "fighter": "zombie"
+  }
+}

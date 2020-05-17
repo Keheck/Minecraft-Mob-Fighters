@@ -1,11 +1,12 @@
 package io.github.keheck.mobfighters.fight.moves;
 
+import io.github.keheck.mobfighters.fight.fighters.Fighter;
 import io.github.keheck.mobfighters.registry.entries.FighterEntry;
 
 public class PounceMove extends Move
 {
-    public PounceMove(FighterEntry owner, int maxMoves) { super(owner, maxMoves); }
+    public PounceMove(Fighter owner) { super(owner, 30); }
 
     @Override
-    public void perform(FighterEntry[] ownParty, FighterEntry[] enemyParty) { }
+    public void perform(Fighter[] ownParty, Fighter[] enemyParty) { }
 }

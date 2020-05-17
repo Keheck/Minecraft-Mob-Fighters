@@ -1,0 +1,5 @@
+[17Mai2020 10:38:50.373] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--gameDir, ., --launchTarget, fmluserdevserver, --fml.mcpVersion, 20190829.143755, --fml.mcVersion, 1.14.4, --fml.forgeGroup, net.minecraftforge, --fml.forgeVersion, 28.2.0]
+[17Mai2020 10:38:50.377] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 4.1.0+62+5bfa59b starting: java version 1.8.0_162 by Oracle Corporation
+[17Mai2020 10:38:50.827] [main/INFO] [net.minecraftforge.fml.loading.FixSSL/CORE]: Added Lets Encrypt root certificates as additional trust
+[17Mai2020 10:38:52.014] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'fmluserdevserver' with arguments [--gameDir, .]
+[17Mai2020 10:38:53.323] [main/INFO] [net.minecraft.server.MinecraftServer/]: You need to agree to the EULA in order to run the server. Go to eula.txt for more info.
