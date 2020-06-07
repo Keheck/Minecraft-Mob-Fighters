@@ -1,0 +1,381 @@
+---- Minecraft Crash Report ----
+// Shall we play a game?
+
+Time: 01.06.20 21:20
+Description: Watching Server
+
+java.lang.Error: ServerHangWatchdog detected that a single server tick took 172,56 seconds (should be max 0.05)
+	at net.minecraftforge.eventbus.EventBus.lambda$handleException$13(EventBus.java:272) ~[eventbus-1.0.0-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventBus$$Lambda$3551/1430845409.get(Unknown Source) ~[?:?] {}
+	at org.apache.logging.log4j.util.LambdaUtil.get(LambdaUtil.java:77) ~[log4j-api-2.11.2.jar:2.11.2] {}
+	at org.apache.logging.log4j.spi.AbstractLogger.logMessage(AbstractLogger.java:1990) ~[log4j-api-2.11.2.jar:2.11.2] {}
+	at org.apache.logging.log4j.spi.AbstractLogger.logIfEnabled(AbstractLogger.java:1835) ~[log4j-api-2.11.2.jar:2.11.2] {}
+	at org.apache.logging.log4j.spi.AbstractLogger.error(AbstractLogger.java:776) ~[log4j-api-2.11.2.jar:2.11.2] {}
+	at net.minecraftforge.eventbus.EventBus.handleException(EventBus.java:272) ~[eventbus-1.0.0-service.jar:?] {}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:263) ~[eventbus-1.0.0-service.jar:?] {}
+	at net.minecraftforge.common.ForgeHooks.onLivingAttack(ForgeHooks.java:317) ~[?:?] {re:classloading}
+	at net.minecraft.entity.LivingEntity.attackEntityFrom(LivingEntity.java:903) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.entity.passive.BatEntity.attackEntityFrom(BatEntity.java:193) ~[?:?] {re:classloading}
+	at net.minecraft.entity.Entity.baseTick(Entity.java:421) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.entity.LivingEntity.baseTick(LivingEntity.java:280) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.entity.MobEntity.baseTick(MobEntity.java:232) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.entity.Entity.tick(Entity.java:386) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.entity.LivingEntity.tick(LivingEntity.java:2119) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.entity.MobEntity.tick(MobEntity.java:311) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.entity.passive.BatEntity.tick(BatEntity.java:107) ~[?:?] {re:classloading}
+	at net.minecraft.world.server.ServerWorld.updateEntity(ServerWorld.java:602) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.world.server.ServerWorld$$Lambda$3499/1575486221.accept(Unknown Source) ~[?:?] {}
+	at net.minecraft.world.World.func_217390_a(World.java:734) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:397) ~[?:?] {re:classloading,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:865) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:342) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:800) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:646) ~[?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_162] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server Watchdog
+Stacktrace:
+	at net.minecraftforge.eventbus.EventBus.lambda$handleException$13(EventBus.java:272)
+	at net.minecraftforge.eventbus.EventBus$$Lambda$3551/1430845409.get(Unknown Source)
+	at org.apache.logging.log4j.util.LambdaUtil.get(LambdaUtil.java:77)
+	at org.apache.logging.log4j.spi.AbstractLogger.logMessage(AbstractLogger.java:1990)
+	at org.apache.logging.log4j.spi.AbstractLogger.logIfEnabled(AbstractLogger.java:1835)
+	at org.apache.logging.log4j.spi.AbstractLogger.error(AbstractLogger.java:776)
+	at net.minecraftforge.eventbus.EventBus.handleException(EventBus.java:272)
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:263)
+	at net.minecraftforge.common.ForgeHooks.onLivingAttack(ForgeHooks.java:317)
+	at net.minecraft.entity.LivingEntity.attackEntityFrom(LivingEntity.java:903)
+	at net.minecraft.entity.passive.BatEntity.attackEntityFrom(BatEntity.java:193)
+	at net.minecraft.entity.Entity.baseTick(Entity.java:421)
+	at net.minecraft.entity.LivingEntity.baseTick(LivingEntity.java:280)
+	at net.minecraft.entity.MobEntity.baseTick(MobEntity.java:232)
+	at net.minecraft.entity.Entity.tick(Entity.java:386)
+	at net.minecraft.entity.LivingEntity.tick(LivingEntity.java:2119)
+	at net.minecraft.entity.MobEntity.tick(MobEntity.java:311)
+	at net.minecraft.entity.passive.BatEntity.tick(BatEntity.java:107)
+	at net.minecraft.world.server.ServerWorld.updateEntity(ServerWorld.java:602)
+	at net.minecraft.world.server.ServerWorld$$Lambda$3499/1575486221.accept(Unknown Source)
+	at net.minecraft.world.World.func_217390_a(World.java:734)
+	at net.minecraft.world.server.ServerWorld.tick(ServerWorld.java:397)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:865)
+	at net.minecraft.server.dedicated.DedicatedServer.updateTimeLightAndEntities(DedicatedServer.java:342)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:800)
+
+-- Thread Dump --
+Details:
+	Threads: "Server Watchdog" Id=54 RUNNABLE
+	at sun.management.ThreadImpl.dumpThreads0(Native Method)
+	at sun.management.ThreadImpl.dumpAllThreads(ThreadImpl.java:454)
+	at net.minecraft.server.dedicated.ServerHangWatchdog.run(ServerHangWatchdog.java:37)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"DestroyJavaVM" Id=53 RUNNABLE
+
+
+"Server-Worker-8" Id=52 WAITING on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"Thread-10" Id=51 RUNNABLE (in native)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus0(Native Method)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus(WindowsNativeDispatcher.java:1007)
+	at sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:586)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Netty Server IO #0" Id=48 RUNNABLE (in native)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll0(Native Method)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.poll(WindowsSelectorImpl.java:296)
+	at sun.nio.ch.WindowsSelectorImpl$SubSelector.access$400(WindowsSelectorImpl.java:278)
+	at sun.nio.ch.WindowsSelectorImpl.doSelect(WindowsSelectorImpl.java:159)
+	at sun.nio.ch.SelectorImpl.lockAndDoSelect(SelectorImpl.java:86)
+	-  locked io.netty.channel.nio.SelectedSelectionKeySet@5d0435e7
+	-  locked java.util.Collections$UnmodifiableSet@593baa9f
+	-  locked sun.nio.ch.WindowsSelectorImpl@1c393fdc
+	at sun.nio.ch.SelectorImpl.select(SelectorImpl.java:97)
+	at io.netty.channel.nio.SelectedSelectionKeySetSelector.select(SelectedSelectionKeySetSelector.java:62)
+	at io.netty.channel.nio.NioEventLoop.select(NioEventLoop.java:756)
+	...
+
+
+"ObjectCleanerThread" Id=47 TIMED_WAITING on java.lang.ref.ReferenceQueue$Lock@51b8590d
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@51b8590d
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+	at io.netty.util.internal.ObjectCleaner$1.run(ObjectCleaner.java:54)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"modloading-worker-4" Id=45 WAITING on java.util.concurrent.ForkJoinPool@2defe5d0
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@2defe5d0
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"modloading-worker-2" Id=43 TIMED_WAITING on java.util.concurrent.ForkJoinPool@2defe5d0
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@2defe5d0
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"JLine terminal non blocking reader thread" Id=41 RUNNABLE (in native)
+	at java.io.FileInputStream.read0(Native Method)
+	at java.io.FileInputStream.read(FileInputStream.java:207)
+	at org.jline.utils.NonBlockingInputStreamImpl.run(NonBlockingInputStreamImpl.java:216)
+	at org.jline.utils.NonBlockingInputStreamImpl$$Lambda$2609/1621294253.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"D3D Screen Updater" Id=40 WAITING on java.lang.Object@2984dda0
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.Object@2984dda0
+	at sun.java2d.d3d.D3DScreenUpdateManager.run(D3DScreenUpdateManager.java:423)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Server console handler" Id=39 TIMED_WAITING on org.jline.utils.NonBlockingInputStreamImpl@7c16c093
+	at java.lang.Object.wait(Native Method)
+	-  waiting on org.jline.utils.NonBlockingInputStreamImpl@7c16c093
+	at org.jline.utils.NonBlockingInputStreamImpl.read(NonBlockingInputStreamImpl.java:139)
+	at org.jline.terminal.impl.DumbTerminal$1.read(DumbTerminal.java:49)
+	at org.jline.utils.NonBlockingInputStream.read(NonBlockingInputStream.java:62)
+	at org.jline.utils.NonBlocking$NonBlockingInputStreamReader.read(NonBlocking.java:168)
+	at org.jline.utils.NonBlockingReader.read(NonBlockingReader.java:57)
+	at org.jline.keymap.BindingReader.readCharacter(BindingReader.java:133)
+	at org.jline.keymap.BindingReader.readBinding(BindingReader.java:110)
+	...
+
+
+"Server thread" Id=28 RUNNABLE
+	at net.minecraftforge.eventbus.EventBus.lambda$handleException$13(EventBus.java:272)
+	at net.minecraftforge.eventbus.EventBus$$Lambda$3551/1430845409.get(Unknown Source)
+	at org.apache.logging.log4j.util.LambdaUtil.get(LambdaUtil.java:77)
+	at org.apache.logging.log4j.spi.AbstractLogger.logMessage(AbstractLogger.java:1990)
+	at org.apache.logging.log4j.spi.AbstractLogger.logIfEnabled(AbstractLogger.java:1835)
+	at org.apache.logging.log4j.spi.AbstractLogger.error(AbstractLogger.java:776)
+	at net.minecraftforge.eventbus.EventBus.handleException(EventBus.java:272)
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:263)
+	...
+
+
+"Thread-5" Id=35 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@6f758e2d
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@6f758e2d
+	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+	at java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+	at com.mojang.util.QueueLogAppender.getNextLogEvent(QueueLogAppender.java:77)
+	at net.minecraft.server.gui.MinecraftServerGui.lambda$getLogComponent$1(MinecraftServerGui.java:137)
+	at net.minecraft.server.gui.MinecraftServerGui$$Lambda$2421/1267198524.run(Unknown Source)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"TimerQueue" Id=36 TIMED_WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@328094b7
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@328094b7
+	at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:215)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2078)
+	at java.util.concurrent.DelayQueue.take(DelayQueue.java:223)
+	at javax.swing.TimerQueue.run(TimerQueue.java:174)
+	at java.lang.Thread.run(Thread.java:748)
+
+	Number of locked synchronizers = 1
+	- java.util.concurrent.locks.ReentrantLock$NonfairSync@3de62776
+
+
+"AWT-EventQueue-0" Id=34 RUNNABLE (in native)
+	at sun.awt.windows.WComponentPeer.beginValidate(Native Method)
+	at java.awt.Container.validate(Container.java:1629)
+	-  locked java.awt.Component$AWTTreeLock@7858d82c
+	at java.awt.Window.dispatchEventImpl(Window.java:2744)
+	at java.awt.Component.dispatchEvent(Component.java:4711)
+	at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:760)
+	at java.awt.EventQueue.access$500(EventQueue.java:97)
+	at java.awt.EventQueue$3.run(EventQueue.java:709)
+	at java.awt.EventQueue$3.run(EventQueue.java:703)
+	...
+
+
+"AWT-Windows" Id=32 RUNNABLE
+	at sun.awt.windows.WToolkit.eventLoop(Native Method)
+	at sun.awt.windows.WToolkit.run(WToolkit.java:306)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"AWT-Shutdown" Id=31 WAITING on java.lang.Object@3b9f25ec
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.Object@3b9f25ec
+	at java.lang.Object.wait(Object.java:502)
+	at sun.awt.AWTAutoShutdown.run(AWTAutoShutdown.java:295)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Java2D Disposer" Id=30 WAITING on java.lang.ref.ReferenceQueue$Lock@374e687e
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@374e687e
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:164)
+	at sun.java2d.Disposer.run(Disposer.java:148)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Server Infinisleeper" Id=29 TIMED_WAITING
+	at java.lang.Thread.sleep(Native Method)
+	at net.minecraft.server.dedicated.DedicatedServer$1.run(DedicatedServer.java:87)
+
+
+"Snooper Timer" Id=27 WAITING on java.util.TaskQueue@15d670c
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.util.TaskQueue@15d670c
+	at java.lang.Object.wait(Object.java:502)
+	at java.util.TimerThread.mainLoop(Timer.java:526)
+	at java.util.TimerThread.run(Timer.java:505)
+
+
+"Server-Worker-6" Id=25 WAITING on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"Server-Worker-5" Id=24 WAITING on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"Server-Worker-4" Id=23 TIMED_WAITING on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"Server-Worker-3" Id=22 WAITING on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"Server-Worker-1" Id=20 WAITING on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.ForkJoinPool@53c3c1ef
+	at java.util.concurrent.ForkJoinPool.awaitWork(ForkJoinPool.java:1824)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1693)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
+
+
+"pool-2-thread-1" Id=19 WAITING on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@3ffa46b3
+	at sun.misc.Unsafe.park(Native Method)
+	-  waiting on java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject@3ffa46b3
+	at java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+	at java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)
+	at java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Thread-2" Id=18 RUNNABLE (in native)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus0(Native Method)
+	at sun.nio.fs.WindowsNativeDispatcher.GetQueuedCompletionStatus(WindowsNativeDispatcher.java:1007)
+	at sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:586)
+	at java.lang.Thread.run(Thread.java:748)
+
+
+"Thread-1" Id=17 TIMED_WAITING
+	at sun.misc.Unsafe.park(Native Method)
+	at java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:338)
+	at com.electronwill.nightconfig.core.file.FileWatcher$WatcherThread.run(FileWatcher.java:190)
+
+
+"JDWP Event Helper Thread" Id=7 RUNNABLE
+
+
+"JDWP Transport Listener: dt_socket" Id=6 RUNNABLE
+
+
+"Attach Listener" Id=5 RUNNABLE
+
+
+"Signal Dispatcher" Id=4 RUNNABLE
+
+
+"Finalizer" Id=3 WAITING on java.lang.ref.ReferenceQueue$Lock@7d88b4e5
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.ReferenceQueue$Lock@7d88b4e5
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+	at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:164)
+	at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:212)
+
+
+"Reference Handler" Id=2 WAITING on java.lang.ref.Reference$Lock@39c13eb2
+	at java.lang.Object.wait(Native Method)
+	-  waiting on java.lang.ref.Reference$Lock@39c13eb2
+	at java.lang.Object.wait(Object.java:502)
+	at java.lang.ref.Reference.tryHandlePending(Reference.java:191)
+	at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:153)
+
+
+
+Stacktrace:
+	at net.minecraft.server.dedicated.ServerHangWatchdog.run(ServerHangWatchdog.java:52)
+	at java.lang.Thread.run(Thread.java:748)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.14.4
+	Minecraft Version ID: 1.14.4
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_162, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 2140552312 bytes (2041 MB) / 3986685952 bytes (3802 MB) up to 7624720384 bytes (7271 MB)
+	CPUs: 8
+	JVM Flags: 0 total; 
+	ModLauncher: 4.1.0+62+5bfa59b
+	ModLauncher launch target: fmluserdevserver
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/eventbus-1.0.0-service.jar eventbus PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar object_holder_definalize PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar runtime_enum_extender PLUGINSERVICE 
+		/accesstransformers-1.0.1-milestone.0.1+94458e7-shadowed.jar accesstransformer PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar capability_inject_definalize PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar runtimedistcleaner PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar fml TRANSFORMATIONSERVICE 
+	FML: 28.2
+	Forge: net.minecraftforge:28.2.0
+	FML Language Providers: 
+		javafml@28.2
+		minecraft@1
+	Mod List: 
+		client-extra.jar Minecraft {minecraft@1.14.4 DONE}
+		main Mob Fighters {mobfighters@1.8 DONE}
+		forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-recomp.jar Forge {forge@28.2.0 DONE}
+	Player Count: 0 / 20; []
+	Data Packs: vanilla, mod:forge, mod:mobfighters
+	Is Modded: Definitely; Server brand changed to 'forge'
+	Type: Dedicated Server (map_server.txt)

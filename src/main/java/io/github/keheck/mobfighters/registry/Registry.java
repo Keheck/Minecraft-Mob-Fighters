@@ -1,6 +1,5 @@
 package io.github.keheck.mobfighters.registry;
 
-import io.github.keheck.mobfighters.MobFighters;
 import io.github.keheck.mobfighters.entity.MobBallEntity;
 import io.github.keheck.mobfighters.fight.moves.GrowlMove;
 import io.github.keheck.mobfighters.fight.moves.PounceMove;

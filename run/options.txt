@@ -22,13 +22,13 @@ gamma:1.0
 renderDistance:12
 guiScale:0
 particles:0
-maxFps:120
+maxFps:260
 difficulty:2
 fancyGraphics:true
 ao:2
 biomeBlendRadius:2
 renderClouds:true
-resourcePacks:[]
+resourcePacks:["mod_resources","vanilla","programer_art"]
 incompatibleResourcePacks:[]
 lastServer:
 lang:en_us

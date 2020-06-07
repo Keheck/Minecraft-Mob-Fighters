@@ -1,10 +1,7 @@
 package io.github.keheck.mobfighters.fight.traits;
 
 import io.github.keheck.mobfighters.fight.fighters.Fighter;
-import io.github.keheck.mobfighters.registry.entries.FighterEntry;
 import io.github.keheck.mobfighters.registry.entries.TraitEntry;
-import io.github.keheck.mobfighters.util.ITraitFactory;
-import net.minecraft.resources.IReloadableResourceManager;
 
 public abstract class Trait
 {
@@ -23,13 +20,11 @@ public abstract class Trait
     /**
      * Only important if this trait requires extra information.
      * If your trait uses extra data, please be sure on what order
-     * the objects are going to be stored in (It will most likely
-     * be the order that {@link INeedExtra#getExtraInfo()} returns
-     * it's values in).
+     * the objects are going to be stored in (It will be the order
+     * that {@link INeedExtra#getExtraInfo()} returns it's values in).
      *
-     * @see TraitEntry#getExtra()
-     * @see TraitEntry#TraitEntry(ITraitFactory, INeedExtra)
-     * @see FighterEntry#gatherData(IReloadableResourceManager)
+     * @see TraitEntry#onFighterBuild(Fighter)
+     * @see INeedExtra
      */
     public final void applyExtraInfo(Object... extraInfo) { this.extraInfo = extraInfo; }
 

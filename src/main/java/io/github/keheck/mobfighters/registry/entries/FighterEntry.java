@@ -1,11 +1,12 @@
 package io.github.keheck.mobfighters.registry.entries;
 
 import com.google.gson.*;
+import io.github.keheck.mobfighters.MobFighters;
 import io.github.keheck.mobfighters.fight.fighters.Fighter;
 import io.github.keheck.mobfighters.fight.moves.Move;
 import io.github.keheck.mobfighters.registry.Registry;
-import io.github.keheck.mobfighters.util.LearnMoveHolder;
-import io.github.keheck.mobfighters.util.StartMoveHolder;
+import io.github.keheck.mobfighters.util.holders.LearnMoveHolder;
+import io.github.keheck.mobfighters.util.holders.StartMoveHolder;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.resources.IReloadableResourceManager;
@@ -14,10 +15,8 @@ import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import org.apache.logging.log4j.core.Logger;
 
 import javax.annotation.Nullable;
 import java.io.BufferedReader;
@@ -79,8 +78,10 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
 
     private final HashMap<TraitEntry, Object[]> traitDataMap = new HashMap<>();
 
-    private static final Gson GSON = (new GsonBuilder()).create();
-    private static final String MC = "minecraft";
+    private static final Gson GSON = new GsonBuilder().create();
+
+    private static int warns = 0;
+    private static int errors = 0;
 
     public FighterEntry(EntityType<? extends LivingEntity> entityType)
     {
@@ -91,30 +92,26 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
         traits = new TraitEntry[]{};
     }
 
+    /** Listen for a server start and apply fighter data. */
     @SubscribeEvent
     @SuppressWarnings("unused")
     public static void serverStarting(FMLServerStartingEvent event)
     {
         IReloadableResourceManager manager = event.getServer().getResourceManager();
         Registry.getFighterRegistry().getEntries().forEach((entry) -> entry.getValue().gatherData(manager));
-    }
-
-    @SubscribeEvent
-    @SuppressWarnings("unused")
-    public static void serverStarted(FMLServerStartedEvent event)
-    {
-
+        LOGGER.info("Loaded all fighters, warnings found: {}", warns);
+        warns = 0;
     }
 
     /**
-     * @return a {@link ResourceLocation} representing a file path used by {@link #gatherData(IReloadableResourceManager)}.
+     * @return A {@link ResourceLocation} representing a file path used by {@link #gatherData(IReloadableResourceManager)}.
      *         Has usually the form "[modID]:fighters/[fighterID].json
      */
     @SuppressWarnings("ConstantConditions")
     private ResourceLocation getDataLocation()
     {
         ResourceLocation location = this.getRegistryName();
-        String domain = location.getNamespace().equals(MC) ? MODID : location.getNamespace();
+        String domain = location.getNamespace().equals(MobFighters.MC) ? MODID : location.getNamespace();
         return new ResourceLocation(domain, "fighters/" + location.getPath() + ".json");
     }
 
@@ -131,7 +128,7 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
     /**
      * This method returns an instance of {@link Fighter} or one of it's subclasses.
      *
-     * @return a new {@link Fighter} instance.
+     * @return A new {@link Fighter} instance.
      */
     public Fighter buildInstance()
     {
@@ -153,6 +150,17 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
         return new Fighter(this, startMoves, traits, hp, atk, def, spd);
     }
 
+    /**
+     * This method is called every time a fighter of this {@code FighterEntry} type
+     * has leveled up. The array {@link #learnPool} is copied into a list to be
+     * filtered for moves that cannot be learned (either because it is already or
+     * because the level of the fighter is not high enough).
+     *
+     * @param caller The fighter that received the level up.
+     * @param level The level the Fighter is now on.
+     * @return Either a {@link Move} instance if one has been
+     *         selected or {@code null} if no move has been selected.
+     */
     @Nullable
     public MoveEntry learnMove(Fighter caller, int level)
     {
@@ -169,7 +177,7 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
     }
 
     /**
-     * @return the registry name of {@link #entityType} by calling it's
+     * @return The registry name of {@link #entityType} by calling it's
      *         {@linkplain EntityType#getRegistryName() getRegistryName()} method
      */
     @Nullable
@@ -179,19 +187,27 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
     @Override
     public Class<FighterEntry> getRegistryType() { return FighterEntry.class; }
 
+    /** @return The {@link EntityType} this instance is representing*/
     public EntityType<? extends LivingEntity> getEntityType() { return entityType; }
 
+    /**
+     * This method is called by {@link TraitEntry#onFighterBuild(Fighter)}. It looks
+     * through the {@link #traitDataMap} and returns the result
+     *
+     * @param forTrait The {@link TraitEntry} requesting tha data.
+     * @return An {@link Object} array containing objects.
+     */
     public Object[] requestData(TraitEntry forTrait) { return traitDataMap.get(forTrait); }
 
     private void gatherData(IReloadableResourceManager manager)
     {
         ResourceLocation myLocation = this.getDataLocation();
-        LOGGER.info("Loading fighter-data for {}. File path: {}", this.getRegistryName(), myLocation);
+        LOGGER.debug("Loading fighter-data for {}. File path: {}", this.getRegistryName(), myLocation);
 
         try(IResource resource = manager.getResource(myLocation);
             BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream())))
         {
-            LOGGER.info("Found resource for {}! Reading data now...", this.getRegistryName());
+            LOGGER.debug("Found resource for {}! Reading data now...", this.getRegistryName());
             JsonObject root = JSONUtils.fromJson(GSON, reader, JsonObject.class);
             Objects.requireNonNull(root);
             JsonElement tElem = root.get("traits");
@@ -211,6 +227,7 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
                 {
                     ArrayList<TraitEntry> extraRead = new ArrayList<>();
                     JsonArray traits = tElem.getAsJsonArray();
+                    this.traits = new TraitEntry[traits.size()];
 
                     for(int i = 0; i < traits.size(); i++)
                     {
@@ -219,7 +236,7 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
                         try
                         {
                             ResourceLocation regName = new ResourceLocation(element.getAsString());
-                            if(regName.getNamespace().equals(MC))
+                            if(regName.getNamespace().equals(MobFighters.MC))
                                 regName = new ResourceLocation(MODID, regName.getPath());
 
                             // Won't likely happen, but just to be sure...
@@ -228,8 +245,11 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
                             if(entry.needsExtra())
                                 extraRead.add(entry);
                         }
-                        catch (IllegalStateException | ClassCastException e)
-                        { LOGGER.error("Trait element in file {} at index {} is not a string!", myLocation, i); }
+                        catch(IllegalStateException | ClassCastException e)
+                        {
+                            LOGGER.error("Trait element in file {} at index {} is not a string!", myLocation, i);
+                            throw e;
+                        }
                     }
 
                     for(TraitEntry entry : extraRead)
@@ -282,7 +302,8 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
                 }
                 catch(IllegalStateException e)
                 {
-                    LOGGER.error("Found error in file {}: JSON element \"traits\" must be an array. Application of traits skipped.", myLocation);
+                    LOGGER.warn("Found error in file {}: JSON element \"traits\" must be an array. Application of traits skipped.", myLocation);
+                    warns++;
                 }
 
             }
@@ -305,7 +326,7 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
                         try { probability = elem.get("probability").getAsFloat(); }
                         catch(Exception ignore) {}
 
-                        if(moveId.getNamespace().equals(MC))
+                        if(moveId.getNamespace().equals(MobFighters.MC))
                             moveId = new ResourceLocation(MODID, moveId.getPath());
 
                         MoveEntry entry = Registry.getMoveRegistry().getValue(moveId);
@@ -346,7 +367,7 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
                         try { level = elem.get("minLvl").getAsInt(); }
                         catch(Exception ignore) {}
 
-                        if(moveId.getNamespace().equals(MC))
+                        if(moveId.getNamespace().equals(MobFighters.MC))
                             moveId = new ResourceLocation(MODID, moveId.getPath());
 
                         MoveEntry entry = Registry.getMoveRegistry().getValue(moveId);
@@ -358,19 +379,21 @@ public final class FighterEntry implements IForgeRegistryEntry<FighterEntry>
                 }
                 catch(IllegalStateException e)
                 {
-                    LOGGER.error("Found error in file {}: JSON element \"learnMoves\" was not an array " +
+                    LOGGER.warn("Found error in file {}: JSON element \"learnMoves\" was not an array " +
                             "OR array elements were not JSON-Objects. Using standard move set.", myLocation);
+                    warns++;
                 }
             }
             /* ---------- Read learnable moves end ---------- */
         }
         catch (IOException e)
         {
-            LOGGER.info("Failed to load resource for {}...", this.getRegistryName());
+            LOGGER.warn("Failed to load resource for {}...", this.getRegistryName());
             e.printStackTrace();
+            warns++;
             return;
         }
 
-        LOGGER.info("Successfully loaded resources for {}!", this.getRegistryName());
+        LOGGER.debug("Successfully loaded resources for {}!", this.getRegistryName());
     }
 }

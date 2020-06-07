@@ -2,6 +2,9 @@ package io.github.keheck.mobfighters.util;
 
 import io.github.keheck.mobfighters.registry.entries.MoveEntry;
 
+/**
+ * This interface hold various constant values
+ */
 public interface Constants
 {
     //Fight stages

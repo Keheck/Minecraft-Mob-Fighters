@@ -1,0 +1,10 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:snowy_mountains": "2020-06-01 21:14:07 +0200",
+      "minecraft:river": "2020-06-01 21:14:00 +0200"
+    },
+    "done": false
+  },
+  "DataVersion": 1976
+}

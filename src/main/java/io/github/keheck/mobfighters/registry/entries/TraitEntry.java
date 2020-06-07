@@ -3,7 +3,7 @@ package io.github.keheck.mobfighters.registry.entries;
 import io.github.keheck.mobfighters.fight.fighters.Fighter;
 import io.github.keheck.mobfighters.fight.traits.INeedExtra;
 import io.github.keheck.mobfighters.fight.traits.Trait;
-import io.github.keheck.mobfighters.util.ITraitFactory;
+import io.github.keheck.mobfighters.util.interfaces.ITraitFactory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -26,7 +26,24 @@ public final class TraitEntry implements IForgeRegistryEntry<TraitEntry>
         this.factory = factory;
     }
 
-    public Trait onFighterBuild(Fighter owner) { return factory.build(owner); }
+    /**
+     * Constructs a new Trait by using the {@link #factory} instance.
+     * If the Trait requires extra information, it will request that
+     * information from the {@link FighterEntry#requestData(TraitEntry)}
+     * method.
+     *
+     * @param owner The fighter that "owns" the trait.
+     * @return A new {@link Trait} instance.
+     */
+    public Trait onFighterBuild(Fighter owner)
+    {
+        Trait trait = factory.build(owner);
+
+        if(this.needsExtra())
+            trait.applyExtraInfo(owner.getEntry().requestData(this));
+
+        return trait;
+    }
 
     /**
      * Returns the field {@link #extra}, containing information on whether the trait needs extra

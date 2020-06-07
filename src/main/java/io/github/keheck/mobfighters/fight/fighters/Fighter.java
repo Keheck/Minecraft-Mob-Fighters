@@ -27,7 +27,7 @@ public final class Fighter
             this.traits[i] = traits[i].onFighterBuild(this);
 
         for(int i = 0; i < startMoves.length; i++)
-            this.moves[i] = startMoves[i].onFighterInit(this);
+            this.moves[i] = startMoves[i].onFighterBuild(this);
 
         this.hp = hp;
         this.atk = atk;
@@ -46,7 +46,7 @@ public final class Fighter
     public boolean hasMove(MoveEntry entry)
     {
         for(Move move : moves)
-            if(entry.onFighterInit(this).equals(move))
+            if(entry.onFighterBuild(this).equals(move))
                 return true;
 
         return false;

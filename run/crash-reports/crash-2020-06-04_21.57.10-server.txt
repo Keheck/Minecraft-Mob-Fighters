@@ -1,0 +1,54 @@
+---- Minecraft Crash Report ----
+// Oops.
+
+Time: 04.06.20 21:57
+Description: Exception in server tick loop
+
+net.minecraftforge.fml.LoadingFailedException: Loading errors encountered: [
+	Mob Fighters (mobfighters) encountered an error during the common_setup event phase
+§7Attempted to load class net/minecraft/client/gui/screen/Screen for invalid dist DEDICATED_SERVER
+]
+	at net.minecraftforge.fml.ModLoader.dispatchAndHandleError(ModLoader.java:201) ~[?:?] {re:classloading}
+	at net.minecraftforge.fml.ModLoader.loadMods(ModLoader.java:154) ~[?:?] {re:classloading}
+	at net.minecraftforge.fml.server.ServerModLoader.begin(ServerModLoader.java:46) ~[?:?] {re:classloading}
+	at net.minecraft.server.dedicated.DedicatedServer.init(DedicatedServer.java:124) ~[?:?] {re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:622) [?:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at java.lang.Thread.run(Thread.java:748) [?:1.8.0_162] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.14.4
+	Minecraft Version ID: 1.14.4
+	Operating System: Windows 7 (amd64) version 6.1
+	Java Version: 1.8.0_162, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 2516362744 bytes (2399 MB) / 3258449920 bytes (3107 MB) up to 7624720384 bytes (7271 MB)
+	CPUs: 8
+	JVM Flags: 0 total; 
+	ModLauncher: 4.1.0+62+5bfa59b
+	ModLauncher launch target: fmluserdevserver
+	ModLauncher naming: mcp
+	ModLauncher services: 
+		/eventbus-1.0.0-service.jar eventbus PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar object_holder_definalize PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar runtime_enum_extender PLUGINSERVICE 
+		/accesstransformers-1.0.1-milestone.0.1+94458e7-shadowed.jar accesstransformer PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar capability_inject_definalize PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar runtimedistcleaner PLUGINSERVICE 
+		/forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-launcher.jar fml TRANSFORMATIONSERVICE 
+	FML: 28.2
+	Forge: net.minecraftforge:28.2.0
+	FML Language Providers: 
+		javafml@28.2
+		minecraft@1
+	Mod List: 
+		client-extra.jar Minecraft {minecraft@1.14.4 SIDED_SETUP}
+		main Mob Fighters {mobfighters@1.8 ERROR}
+		forge-1.14.4-28.2.0_mapped_snapshot_20190719-1.14.3-recomp.jar Forge {forge@28.2.0 SIDED_SETUP}
+	Data Packs: 
+	Is Modded: Definitely; Server brand changed to 'forge'
+	Type: Dedicated Server (map_server.txt)

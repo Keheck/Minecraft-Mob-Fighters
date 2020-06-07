@@ -2,7 +2,7 @@ package io.github.keheck.mobfighters.registry.entries;
 
 import io.github.keheck.mobfighters.fight.fighters.Fighter;
 import io.github.keheck.mobfighters.fight.moves.Move;
-import io.github.keheck.mobfighters.util.IMoveFactory;
+import io.github.keheck.mobfighters.util.interfaces.IMoveFactory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -27,7 +27,7 @@ public final class MoveEntry implements IForgeRegistryEntry<MoveEntry>
         return this.setRegistryName(new ResourceLocation(modID, name));
     }
 
-    public Move onFighterInit(Fighter owner) { return factory.build(owner); }
+    public Move onFighterBuild(Fighter owner) { return factory.build(owner); }
 
     @Nullable
     @Override
