@@ -1,13 +1,8 @@
 package io.github.keheck.mobfighters.item;
 
-import com.sun.jna.platform.win32.Guid;
 import io.github.keheck.mobfighters.MobFighters;
-import io.github.keheck.mobfighters.gui.screen.FightScreen;
-import io.github.keheck.mobfighters.util.helpers.GUIDisplayHelper;
 import io.github.keheck.mobfighters.util.network.FightStartPacket;
 import io.github.keheck.mobfighters.util.network.MobfightersNetworkHandler;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
@@ -17,13 +12,12 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkDirection;
-import net.minecraftforge.fml.network.PacketDistributor;
 
 public class FightInitiatorItem extends Item
 {
     public FightInitiatorItem()
     {
-        super(new Properties().group(ItemGroup.MISC));
+        super(new Properties().group(ItemGroup.MISC).maxStackSize(1));
         setRegistryName(MobFighters.MODID, "fight_initiator");
     }
 
@@ -41,6 +35,7 @@ public class FightInitiatorItem extends Item
         {
             ServerPlayerEntity serverPlayer = (ServerPlayerEntity)playerIn;
 
+            // I know, there are convenient methods for sending packets to clients.
             MobfightersNetworkHandler.CHANNEL.sendTo
                     (
                             new FightStartPacket(1, playerIn, playerIn),

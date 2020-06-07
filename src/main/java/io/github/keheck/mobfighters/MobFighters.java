@@ -53,7 +53,7 @@ public final class MobFighters
     private static int MSG_ID = 0;
     public void doCommonSetup(FMLCommonSetupEvent event)
     {
-        MobfightersNetworkHandler.CHANNEL.registerMessage(MSG_ID++, FightStartPacket.class, FightStartPacket::encode, FightStartPacket::decode, FightStartPacket::handle);
+        MobfightersNetworkHandler.CHANNEL.registerMessage(++MSG_ID, FightStartPacket.class, FightStartPacket::encode, FightStartPacket::decode, FightStartPacket::handle);
     }
 
     public static MobFighters getInstance() { return instance; }

@@ -36,6 +36,9 @@ public class FightStartPacket
 
     private FightStartPacket() { }
 
+    // Offset the data by one byte, to get a valid discriminator
+    // Was previously not present, and caused invalid discriminator problems
+    private static final int off = 1;
     public static void encode(FightStartPacket packet, PacketBuffer buffer)
     {
         for(int i = 0; i < 4; i++)
@@ -47,37 +50,37 @@ public class FightStartPacket
             if(i < 2)
             {
                 if(putLeast)
-                    buffer.setLong(i*Long.BYTES, packet.playerUUID.getLeastSignificantBits());
+                    buffer.setLong(i*Long.BYTES+off, packet.playerUUID.getLeastSignificantBits());
                 else
-                    buffer.setLong(i*Long.BYTES, packet.playerUUID.getMostSignificantBits());
+                    buffer.setLong(i*Long.BYTES+off, packet.playerUUID.getMostSignificantBits());
             }
             // Put the enemy in the buffer
             else
             {
                 if(putLeast)
-                    buffer.setLong(i*Long.BYTES, packet.enemyUUID.getLeastSignificantBits());
+                    buffer.setLong(i*Long.BYTES+off, packet.enemyUUID.getLeastSignificantBits());
                 else
-                    buffer.setLong(i*Long.BYTES, packet.enemyUUID.getMostSignificantBits());
+                    buffer.setLong(i*Long.BYTES+off, packet.enemyUUID.getMostSignificantBits());
             }
         }
 
-        buffer.setInt(Long.BYTES*4, packet.fightID);
-        buffer.setBoolean(Long.BYTES*4 + Integer.BYTES, packet.enemyWild);
+        buffer.setInt(Long.BYTES*4+off, packet.fightID);
+        buffer.setBoolean(Long.BYTES*4 + Integer.BYTES+off, packet.enemyWild);
     }
 
     public static FightStartPacket decode(PacketBuffer buffer)
     {
         FightStartPacket packet = new FightStartPacket();
 
-        long playerLeast = buffer.getLong(0);
-        long playerMost  = buffer.getLong(Long.BYTES);
-        long enemyLeast  = buffer.getLong(Long.BYTES*2);
-        long enemyMost   = buffer.getLong(Long.BYTES*3);
+        long playerLeast = buffer.getLong(off);
+        long playerMost  = buffer.getLong(Long.BYTES+off);
+        long enemyLeast  = buffer.getLong(Long.BYTES*2+off);
+        long enemyMost   = buffer.getLong(Long.BYTES*3+off);
 
         packet.playerUUID = new UUID(playerMost, playerLeast);
         packet.enemyUUID = new UUID(enemyMost, enemyLeast);
-        packet.fightID = buffer.getInt(Long.BYTES*4);
-        packet.enemyWild = buffer.getBoolean(Long.BYTES*4 + Integer.BYTES);
+        packet.fightID = buffer.getInt(Long.BYTES*4+off);
+        packet.enemyWild = buffer.getBoolean(Long.BYTES*4 + Integer.BYTES+off);
 
         return packet;
     }
